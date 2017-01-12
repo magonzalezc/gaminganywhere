@@ -154,8 +154,8 @@ ffmpeg:
 		--enable-libopus \
 		--enable-libxvid \
 		--enable-gpl --enable-nonfree --disable-outdev=sdl \
-		--extra-cflags=-I$(GADEPS)/include \
-		--extra-ldflags=-L$(GADEPS)/lib
+		--extra-cflags=-fopenmp,-I$(GADEPS)/include \
+		--extra-ldflags=-fopenmp,-L$(GADEPS)/lib
 	make -C $(FFMPEGDIR) $(PARALLEL_MAKE)
 	make -C $(FFMPEGDIR) install
 	rm -rf $(FFMPEGDIR)
