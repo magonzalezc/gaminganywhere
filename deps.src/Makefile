@@ -154,7 +154,6 @@ ffmpeg:
 	rm -rf $(FFMPEGDIR)
 
 live555:
-	$(TGZUNPACK) $(LIVE555)
 	# enable -fPIC for macosx and linux
 	mv -f $(LIVE555DIR)/config.linux $(LIVE555DIR)/config.linux.old
 	mv -f $(LIVE555DIR)/config.macosx $(LIVE555DIR)/config.macosx.old
