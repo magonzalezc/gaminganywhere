@@ -45,11 +45,6 @@ osx_brew:
 		--with-theora --with-x265 --with-tools ffmpeg
 
 linux_ubuntu:
-	@echo 'You will need root permissions to install packages'
-	sudo apt-get install libsdl2-dev libsdl2-ttf-dev yasm \
-			libmp3lame-dev libopus-dev libogg-dev \
-			libvorbis-dev libtheora-dev \
-			libvpx-dev libx264-dev libxvidcore-dev
 
 sdl2:
 	$(TGZUNPACK) $(SDL2)
@@ -137,14 +132,12 @@ x265:
 	rm -rf $(X265DIR)
 
 xvid:
-	$(TBZUNPACK) $(XVID)
 	cd $(XVIDDIR)/build/generic; ./configure --prefix=$(GADEPS)
 	make -C $(XVIDDIR)/build/generic $(PARALLEL_MAKE)
 	make -C $(XVIDDIR)/build/generic install
 	rm -rf $(XVIDDIR)
 
 ffmpeg:
-	$(TBZUNPACK) $(FFMPEG)
 	cd $(FFMPEGDIR); ./configure --prefix=$(GADEPS) \
 		--enable-shared --enable-pic \
 		--enable-libmp3lame \
