@@ -208,6 +208,8 @@ RTPSink* GAMediaSubsession
 				interopConstraintsStr*/);
 	} else if(strcmp(mimetype, "video/VP8") == 0) {
 		result = QoSVP8VideoRTPSink::createNew(envir(), rtpGroupsock, rtpPayloadTypeIfDynamic);
+	} else if(strcmp(mimetype, "video/LHE") == 0) {
+		result = QoSLHEVideoRTPSink::createNew(envir(), rtpGroupsock);
 	} 
 	if(result == NULL) {
 		ga_error("GAMediaSubsession: create RTP sink for %s failed.\n", mimetype);

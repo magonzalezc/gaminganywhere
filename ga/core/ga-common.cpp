@@ -979,7 +979,9 @@ struct ga_codec_entry {
  */
 struct ga_codec_entry ga_codec_table[] = {
 	{ "H264", AV_CODEC_ID_H264, "video/avc", { "h264", NULL } },
+	{ "H263", AV_CODEC_ID_H264, "video/h263", { "h263", NULL } },
 	{ "H265", AV_CODEC_ID_H265, "video/hevc", { "hevc", NULL } },
+	{ "LHE", AV_CODEC_ID_LHE, "video/lhe", { "lhe", NULL } },
 	{ "VP8", AV_CODEC_ID_VP8, "video/x-vnd.on2.vp8", { "libvpx", NULL } },
 	{ "MPA", AV_CODEC_ID_MP3, "audio/mpeg", { "mp3", NULL } },
 	{ "OPUS", AV_CODEC_ID_OPUS, "audio/opus", { "libopus", NULL } },

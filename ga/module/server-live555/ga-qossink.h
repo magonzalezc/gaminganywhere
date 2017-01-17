@@ -29,6 +29,7 @@
 #include <VP8VideoRTPSink.hh>
 #include <TheoraVideoRTPSink.hh>
 #include <T140TextRTPSink.hh>
+#include <LHEVideoRTPSink.hh>
 
 //////////////////////////////////////////////////////////////////////////////
 
@@ -164,6 +165,17 @@ public:
 protected:
 	QoSVP8VideoRTPSink(UsageEnvironment& env, Groupsock* RTPgs, unsigned char rtpPayloadFormat);
 	~QoSVP8VideoRTPSink();
+};
+
+//////////////////////////////////////////////////////////////////////////////
+
+class QoSLHEVideoRTPSink: public LHEVideoRTPSink {
+public:
+	static QoSLHEVideoRTPSink*
+		createNew(UsageEnvironment& env, Groupsock* RTPgs);
+protected:
+	QoSLHEVideoRTPSink(UsageEnvironment& env, Groupsock* RTPgs);
+	~QoSLHEVideoRTPSink();
 };
 
 //////////////////////////////////////////////////////////////////////////////
