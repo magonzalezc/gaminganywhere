@@ -5,7 +5,7 @@ USE_SYSTEM_PACKAGES ?= 0
 PARALLEL_MAKE	?= -j5
 SYSTEM		= $(shell uname -s)
 PACKAGES	= sdl2 sdl2_ttf yasm lame opus ogg vorbis theora vpx \
-		  x264 x265 xvid ffmpeg live555
+		  x264 xvid ffmpeg_lhe live555
 OSX_CLANG_PATCH	= echo '*** Not on OS X: not applied ***'
 
 ### package configurations for Mac
@@ -27,7 +27,7 @@ ifeq ($(SYSTEM),Linux)
 ###### Ubuntu?
 LINUXDIST	= $(shell grep '=Ubuntu' /etc/lsb-release | awk -F= '{print $$2}')
 ifeq ($(LINUXDIST),Ubuntu)
-PACKAGES	= linux_ubuntu x265 ffmpeg live555
+PACKAGES	= linux_ubuntu ffmpeg_lhe live555
 endif
 endif
 
@@ -40,9 +40,9 @@ all: $(PACKAGES)
 
 osx_brew:
 	brew install sdl2 sdl2_ttf yasm lame opus libogg libvorbis theora \
-		libvpx x264 x265 xvid
+		libvpx x264 xvid
 	brew install --with-libvorbis --with-libvpx --with-opus \
-		--with-theora --with-x265 --with-tools ffmpeg
+		--with-theora --with-tools ffmpeg_lhe
 
 linux_ubuntu:
 
@@ -137,21 +137,19 @@ xvid:
 	make -C $(XVIDDIR)/build/generic install
 	rm -rf $(XVIDDIR)
 
-ffmpeg:
+ffmpeg_lhe:
 	cd $(FFMPEGDIR); ./configure --prefix=$(GADEPS) \
 		--enable-shared --enable-pic \
 		--enable-libmp3lame \
 		--enable-libtheora --enable-libvorbis \
 		--enable-libx264 --enable-libvpx \
-		--enable-libx265 \
 		--enable-libopus \
 		--enable-libxvid \
 		--enable-gpl --enable-nonfree --disable-outdev=sdl \
-		--extra-cflags=-fopenmp,-I$(GADEPS)/include \
-		--extra-ldflags=-fopenmp,-L$(GADEPS)/lib
+		--extra-cflags="-fopenmp -I$(GADEPS)/include" \
+		--extra-ldflags="-fopenmp -L$(GADEPS)/lib"
 	make -C $(FFMPEGDIR) $(PARALLEL_MAKE)
 	make -C $(FFMPEGDIR) install
-	rm -rf $(FFMPEGDIR)
 
 live555:
 	# enable -fPIC for macosx and linux
@@ -169,5 +167,4 @@ live555:
 	-mkdir -p $(GADEPS)/include/live555
 	find $(LIVE555DIR) -name '*.hh' -exec cp -f {} $(GADEPS)/include/live555 \;
 	cp -f $(LIVE555DIR)/groupsock/include/NetCommon.h $(GADEPS)/include/live555
-	rm -rf $(LIVE555DIR)
 
