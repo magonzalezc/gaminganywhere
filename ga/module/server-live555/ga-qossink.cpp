@@ -258,3 +258,19 @@ QoSLHEVideoRTPSink
 
 //////////////////////////////////////////////////////////////////////////////
 
+QoSMLHEVideoRTPSink*
+QoSMLHEVideoRTPSink
+::createNew(UsageEnvironment& env, Groupsock* RTPgs) {
+	return new QoSMLHEVideoRTPSink(env, RTPgs);
+}
+
+QoSMLHEVideoRTPSink
+::QoSMLHEVideoRTPSink(UsageEnvironment& env, Groupsock* RTPgs)
+	: MLHEVideoRTPSink(env, RTPgs) {
+	qos_server_add_sink("MLHE", this);
+}
+
+QoSMLHEVideoRTPSink
+::~QoSMLHEVideoRTPSink() { qos_server_remove_sink(this); }
+
+//////////////////////////////////////////////////////////////////////////////

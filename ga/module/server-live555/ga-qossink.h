@@ -30,6 +30,7 @@
 #include <TheoraVideoRTPSink.hh>
 #include <T140TextRTPSink.hh>
 #include <LHEVideoRTPSink.hh>
+#include <MLHEVideoRTPSink.hh>
 
 //////////////////////////////////////////////////////////////////////////////
 
@@ -176,6 +177,17 @@ public:
 protected:
 	QoSLHEVideoRTPSink(UsageEnvironment& env, Groupsock* RTPgs);
 	~QoSLHEVideoRTPSink();
+};
+
+//////////////////////////////////////////////////////////////////////////////
+
+class QoSMLHEVideoRTPSink: public MLHEVideoRTPSink {
+public:
+	static QoSMLHEVideoRTPSink*
+		createNew(UsageEnvironment& env, Groupsock* RTPgs);
+protected:
+	QoSMLHEVideoRTPSink(UsageEnvironment& env, Groupsock* RTPgs);
+	~QoSMLHEVideoRTPSink();
 };
 
 //////////////////////////////////////////////////////////////////////////////
