@@ -210,7 +210,7 @@ RTPSink* GAMediaSubsession
 		result = QoSVP8VideoRTPSink::createNew(envir(), rtpGroupsock, rtpPayloadTypeIfDynamic);
 	} else if(strcmp(mimetype, "video/LHE") == 0) {
 		result = QoSLHEVideoRTPSink::createNew(envir(), rtpGroupsock);
-	} else if(strcmp(mimetype, "video/MLHE") == 0) {
+	} else if(strcmp(mimetype, "video/mlhe") == 0) {
 		result = QoSMLHEVideoRTPSink::createNew(envir(), rtpGroupsock);
 	}
 	if(result == NULL) {
